@@ -1,11 +1,15 @@
+"use client";;
+
 import * as React from 'react';
 import { BentoGrid, BentoGridItem } from "./BentoGrid";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import Image from "next/image";
 import { ChangeEvent, useState } from "react";
+import { getAllProjects } from "@/utils/lib/projects";
+import Image from 'next/image';
+import { withAuthInfo, WithAuthInfoProps } from "@propelauth/react";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -18,7 +22,8 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-export function BentoGridDemo() {
+
+export const BentoGridDemo = withAuthInfo((props: WithAuthInfoProps) => {
   const [gemError, setGemError] = React.useState("");
   const [item, setItem] = React.useState<{
     title: string;
@@ -26,12 +31,38 @@ export function BentoGridDemo() {
     header: React.ReactNode;
     icon: React.ReactNode;
   }>({title: "", description: "", header: "", icon: ""});
+
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = (item:any) => {
     setItem(item);
     setOpen(true);
   }
   const handleClose = () => setOpen(false);
+
+  // Set state to store the projects
+  const [projects, setProjects] = React.useState<any[]>([]);
+  const[items, setItems] = React.useState<any[]>([]);
+
+  // Get the user email from the props
+  const email = props.user?.email;
+
+  // Get all the projects for everyone except the user
+  React.useEffect(() => {
+    async function fetchData() {
+      const response = await getAllProjects(email);
+      console.log("ARYANANNNANANANA:", response.data);
+
+      if (!response.success) {
+        console.error("Error fetching data");
+      } else {
+        // Set the projects in the state
+        setProjects(response.data);
+      }
+    }
+
+    fetchData();
+  }, [])
 
   const [imageUrl, setImageUrl] = useState(null as string | null);
 
@@ -78,14 +109,14 @@ export function BentoGridDemo() {
   return (
     <>
     <BentoGrid className="max-w-4xl mx-auto mt-24">
-      {items.map((item, i) => (
+      {projects && projects.map((item, i) => (
         <BentoGridItem
           onClick={() => handleOpen(item)}
           key={i}
-          title={item.title}
+          title={item.name}
           description={item.description}
-          header={item.header}
-          icon={item.icon}
+          // header={item.sampleImages[0]}
+          // icon={item.points}
           className={i === 3 || i === 6 ? "md:col-span-2" : ""}
         />
       ))}
@@ -124,54 +155,12 @@ export function BentoGridDemo() {
     </>
   );
 }
+
+);
 const Skeleton = () => (
   <img
     src="demo1.png"
     className="object-cover flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"
   ></img>
 );
-const items = [
-  {
-    title: "The Dawn of Innovation",
-    description: "Explore the birth of groundbreaking ideas and inventions.",
-    header: <Skeleton />,
-    icon: <span>100 P$</span>,
-  },
-  {
-    title: "The Digital Revolution",
-    description: "Dive into the transformative power of technology.",
-    header: <Skeleton />,
-    icon: <span>100 P$</span>,
-  },
-  {
-    title: "The Art of Design",
-    description: "Discover the beauty of thoughtful and functional design.",
-    header: <Skeleton />,
-    icon: <span>100 P$</span>,
-  },
-  {
-    title: "The Power of Communication",
-    description:
-      "Understand the impact of effective communication in our lives.",
-    header: <Skeleton />,
-    icon: <span>100 P$</span>,
-  },
-  {
-    title: "The Pursuit of Knowledge",
-    description: "Join the quest for understanding and enlightenment.",
-    header: <Skeleton />,
-    icon: <span>100 P$</span>,
-  },
-  {
-    title: "The Joy of Creation",
-    description: "Experience the thrill of bringing ideas to life.",
-    header: <Skeleton />,
-    icon: <span>100 P$</span>,
-  },
-  {
-    title: "The Spirit of Adventure",
-    description: "Embark on exciting journeys and thrilling discoveries.",
-    header: <Skeleton />,
-    icon: <span>100 P$</span>,
-  },
-];
+
