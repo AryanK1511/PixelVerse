@@ -4,8 +4,6 @@ import { BentoGridDemo } from "./FullBentoGrid";
 import { Background } from "./Background";
 
 export default function Homepage() {
-  
-
   return (
     <>
       <Navbar />  
@@ -13,3 +11,4 @@ export default function Homepage() {
     </>
   );
 }
+
