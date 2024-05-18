@@ -1,10 +1,10 @@
 "use client";
-import { Navbar } from "../components/Navbar";
+import Nav from "../components/Nav";
 
 export default function Dashboard() {
   return (
     <>
-      <Navbar />  
+      <Nav />  
     </>
   );
 }

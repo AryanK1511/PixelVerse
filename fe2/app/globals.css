@@ -8,7 +8,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -30,4 +30,24 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.nav-bar {
+  padding: 20px 0;
+  background-color: #fff;
+}
+
+.nav-link-1 {
+  border: 2px solid #dda15e;
+  color: #dda15e;
+  padding: 5px 14px;
+  font-weight: 700;
+}
+
+.nav-link-2 {
+  border: 2px solid #283618;
+  color: #fff;
+  background-color: #283618;
+  padding: 5px 14px;
+  font-weight: 700;
 }
