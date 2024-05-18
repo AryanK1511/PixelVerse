@@ -29,7 +29,6 @@ export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
   ];
 
   const navRedirect = (link: string) => {
-    console.log(link);
     if (link === "/logout") {
       logoutFunction(true);
       return;
@@ -42,6 +41,7 @@ export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
       router.push("/");
     }
   }, []);
+  
   return (
     <AnimatePresence mode="wait">
       <motion.div

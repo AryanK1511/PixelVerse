@@ -17,12 +17,19 @@
     "@tabler/icons-react": "^3.4.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.4",
+    "jotai": "^2.8.0",
     "mini-svg-data-uri": "^1.4.4",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-element-to-jsx-string": "^15.0.0",
     "tailwind-merge": "^2.3.0"
+    "@google-cloud/storage": "^7.11.0",
+    "date-fns": "^3.6.0",
+    "mime": "^4.0.3",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",

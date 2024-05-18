@@ -7,5 +7,6 @@ const routeHandlers = getRouteHandlers({
     return "/home";
   },
 });
+
 export const GET = routeHandlers.getRouteHandler;
 export const POST = routeHandlers.postRouteHandler;
