@@ -3,7 +3,7 @@ import { join } from "path";
 import { stat, mkdir, writeFile, unlink } from "fs/promises";
 import * as dateFn from "date-fns";
 import { NextRequest, NextResponse } from "next/server";
-import { getImage, uploadImage } from "@/google/bucket";
+import { getImage, uploadImage } from "@/utils/google/bucket";
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
