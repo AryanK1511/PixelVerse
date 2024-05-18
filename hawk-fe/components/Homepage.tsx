@@ -1,34 +1,52 @@
+"use client";
+import { Background } from "@/components/Background";
+import Button from "@/components/Button";
+import { CardProps, ImageCard } from "@/components/ImageCard";
+import ImageCards from "@/components/ImageCards";
+import { Navbar } from "@/components/Navbar";
 
-import { withAuthInfo, useLogoutFunction, WithAuthInfoProps } from '@propelauth/react'
-import { useEffect, useState } from 'react';
-import { useRouter } from "next/navigation";
-import { AuthProvider } from '@propelauth/react';
-
-const HomepageComponent = withAuthInfo((props: WithAuthInfoProps) => {
-    const [userType, setUserType] = useState<string>("");
-    const router = useRouter();
-
-    useEffect(() => {
-        setUserType(localStorage.getItem("user-type")!);
-        if(!props.isLoggedIn) {
-            router.push("/")
-        }
-    }, []);
-
-    const logoutFunction = useLogoutFunction()
-
-
-    if (props.isLoggedIn) {
-        return (
-            <AuthProvider authUrl={process.env.NEXT_PUBLIC_AUTH_URL!}>
-
-            <div>
-                <p>You are logged in as {props.user.email}. Your type is {userType}</p>\
-                <button onClick={() => {logoutFunction(true)}}>Logout</button>
-            </div>
-            </AuthProvider>
-        )
-    }
-});
-
-export default HomepageComponent;
+export default function Homepage() {
+  const mockCardsProps: CardProps[] = [
+    {
+      title: "Card 1",
+      description: "This is the description for Card 1",
+      imageLink: "",
+      points: 10,
+    },
+    {
+      title: "Card 2",
+      description: "This is the description for Card 2",
+      imageLink: "",
+      points: 15,
+    },
+    {
+      title: "Card 3",
+      description: "This is the description for Card 3",
+      imageLink: "",
+      points: 20,
+    },
+    {
+      title: "Card 3",
+      description: "This is the description for Card 3",
+      imageLink: "",
+      points: 20,
+    },
+    {
+      title: "Card 3",
+      description: "This is the description for Card 3",
+      imageLink: "",
+      points: 20,
+    },
+    // Add more mock data as needed
+  ];
+  return (
+    <Background className="w-screen h-full min-h-screen">
+      <Navbar />
+      <ImageCards
+        className="grid grid-cols-3 gap-x-4 gap-y-16 pt-20"
+        cardsProps={mockCardsProps}
+      />
+      <Button className="my-10">+</Button>
+    </Background>
+  );
+}
