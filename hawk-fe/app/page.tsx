@@ -4,6 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { FlipWords } from "@/components/FlipWords";
 import Button from "@/components/Button";
+import { userAuth } from "@/utils/lib";
 
 // ===== HOMEPAGE =====
 export default function Home() {
@@ -12,7 +13,10 @@ export default function Home() {
 
   // Handle sign in
   const handleSignIn = async () => {
+    // Set the type of the user in local storage
     localStorage.setItem("user-type", "user");
+
+    // Redirect the user to the auth page
     router.push(process.env.NEXT_PUBLIC_AUTH_URL!);
   };
 
@@ -24,7 +28,7 @@ export default function Home() {
           <p className="text-4xl sm:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 py-8">
             Dataset Generator
           </p>
-          <div>
+          <div className="text-xl">
             <span>The industry standard tool for</span>
             <FlipWords
               words={["AI Startups", "ML Enthusiasts", "Hackers", "Students"]}
