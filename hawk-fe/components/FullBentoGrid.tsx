@@ -73,10 +73,6 @@ export function BentoGridDemo() {
         } catch (error) {
             console.error("something went wrong, check your console.");
         }
-
-        /** Reset file input */
-        e.target.type = "text";
-        e.target.type = "file";
     };
 
   return (
