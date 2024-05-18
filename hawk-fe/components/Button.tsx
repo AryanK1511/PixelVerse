@@ -1,19 +1,22 @@
 'use client';
-import React from "react";
 
-interface Props {
-  children: React.ReactNode;
-  className?: string;
-  onClick?: () => void;
+import React from 'react';
+
+// ===== BUTTON COMPONENT =====
+interface ButtonProps {
+  text: string;
+  onClick: () => void;
 }
 
-export default function Button({ children, className, onClick }: Props) {
+const Button: React.FC<ButtonProps> = ({ text, onClick }) => {
   return (
-    <button className={"p-[3px] relative " + className || ""} onClick={onClick}>
-      <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
-      <div className="px-12 py-4 bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
-        {children}
-      </div>
+    <button
+      onClick={onClick}
+      className="px-6 py-3 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white text-lg shadow-lg hover:from-blue-600 hover:to-purple-600 transition duration-300"
+    >
+      {text}
     </button>
   );
-}
+};
+
+export default Button;
