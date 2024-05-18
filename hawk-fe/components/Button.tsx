@@ -9,7 +9,7 @@ interface ButtonProps {
   className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ text, onClick, className }) => {
+const CustButton: React.FC<ButtonProps> = ({ text, onClick, className }) => {
   return (
     <button
       onClick={onClick}
@@ -23,5 +23,4 @@ const Button: React.FC<ButtonProps> = ({ text, onClick, className }) => {
   );
 };
 
-export default Button;
-
+export default CustButton;

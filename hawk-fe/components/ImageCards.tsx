@@ -1,6 +1,5 @@
 import React from "react";
 import { CardProps, ImageCard } from "./ImageCard";
-import { BackgroundGradient } from "./BackgroundGradient";
 
 interface Props {
   cardsProps: CardProps[];
@@ -10,6 +9,7 @@ interface Props {
 
 export default function ImageCards({ cardsProps, className, children }: Props) {
   return (
+    
     <div className={className}>
       {cardsProps.map((cardProp, i) => (
         <ImageCard key={i} {...cardProp} />
