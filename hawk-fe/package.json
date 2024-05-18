@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.18",
     "@propelauth/nextjs": "^0.1.2",
     "@propelauth/react": "^2.0.21",
     "@tabler/icons-react": "^3.4.0",
