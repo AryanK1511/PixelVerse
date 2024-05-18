@@ -6,8 +6,9 @@ import { useLogoutFunction } from "@propelauth/react";
 import { useRouter } from "next/navigation";
 import { withAuthInfo, WithAuthInfoProps } from "@propelauth/react";
 
-export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
-  const logoutFunction = useLogoutFunction();
+// export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
+export const Navbar = () => {
+  // const logoutFunction = useLogoutFunction();
   const router = useRouter();
   const navItems: {
     name: string;
@@ -19,6 +20,10 @@ export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
       link: "/",
     },
     {
+      name: "My Projects",
+      link: "/projects",
+    },
+    {
       name: "Logout",
       link: "/logout",
     },
@@ -27,16 +32,16 @@ export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
   const navRedirect = (link: string) => {
     console.log(link);
     if (link === "/logout") {
-      logoutFunction(true);
+      // logoutFunction(true);
       return;
     }
     router.push(link);
   };
 
   useEffect(() => {
-    if (!props.isLoggedIn) {
-      router.push("/");
-    }
+    // if (!props.isLoggedIn) {
+    //   router.push("/");
+    // }
   }, []);
   return (
     <AnimatePresence mode="wait">
@@ -53,7 +58,7 @@ export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
           duration: 0.2,
         }}
         className={cn(
-          "flex max-w-fit fixed top-0 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full dark:bg-black bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-8 py-4  items-center justify-center space-x-4",
+          "flex max-w-fit fixed top-0 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full dark:bg-black bg-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-8 py-4  items-center justify-center space-x-4"
         )}
       >
         {navItems.map((navItem: any, idx: number) => (
@@ -65,10 +70,12 @@ export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
             )}
           >
             <span className="block sm:hidden">{navItem.icon}</span>
-            <span className="hidden sm:block text-md font-bold">{navItem.name}</span>
+            <span className="hidden sm:block text-md font-bold">
+              {navItem.name}
+            </span>
           </button>
         ))}
       </motion.div>
     </AnimatePresence>
   );
-});
+};

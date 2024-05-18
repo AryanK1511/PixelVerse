@@ -1,15 +1,5 @@
 import React from "react";
 import { BentoGrid, BentoGridItem } from "./BentoGrid";
-import {
-  IconArrowWaveRightUp,
-  IconBoxAlignRightFilled,
-  IconBoxAlignTopLeft,
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
-} from "@tabler/icons-react";
-
 export function BentoGridDemo() {
   return (
     <BentoGrid className="max-w-4xl mx-auto mt-24">
@@ -27,7 +17,10 @@ export function BentoGridDemo() {
   );
 }
 const Skeleton = () => (
-  <img src="demo1.png" className="object-cover flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></img>
+  <img
+    src="demo1.png"
+    className="object-cover flex flex-1 w-auto h-full rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"
+  ></img>
 );
 const items = [
   {
