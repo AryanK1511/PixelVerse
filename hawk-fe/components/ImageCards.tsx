@@ -1,5 +1,6 @@
 import React from "react";
 import { CardProps, ImageCard } from "./ImageCard";
+import { BackgroundGradient } from "./BackgroundGradient";
 
 interface Props {
   cardsProps: CardProps[];

@@ -2,6 +2,7 @@
 import { CardProps, ImageCard } from "@/components/ImageCard";
 import { Navbar } from "@/components/Navbar";
 import { BentoGridDemo } from "./FullBentoGrid";
+import { Background } from "./Background";
 
 export default function Homepage() {
   const mockCardsProps: CardProps[] = [
@@ -39,20 +40,8 @@ export default function Homepage() {
   ];
   return (
     <>
-    <Navbar />
-    
-    <BentoGridDemo />
-  
-    {/*
-    <Background className="w-screen h-full min-h-screen">
-      <Navbar />
-      <ImageCards
-        className="grid grid-cols-3 gap-x-16 gap-y-20 pt-20"
-        cardsProps={mockCardsProps}
-      />
-      <Button className="my-10">+</Button>
-    </Background>
-    */}
+      <Navbar />  
+      <BentoGridDemo />
     </>
   );
 }
