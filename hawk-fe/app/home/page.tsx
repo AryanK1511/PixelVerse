@@ -1,7 +1,15 @@
-"use client";
+'use client';
+import React from "react";
 import Business from "@/components/Business";
-import User from "@/components/User";
+import { AuthProvider } from "@propelauth/react";
 
-export default function Home() {
-  return <Business />;
+
+export default function Homepage() {
+
+  return (
+    <AuthProvider authUrl={process.env.NEXT_PUBLIC_AUTH_URL!}>
+      <Business />;
+    </AuthProvider>
+  );
+
 }
