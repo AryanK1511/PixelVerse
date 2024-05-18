@@ -1,17 +1,14 @@
 "use client";
-
 import { Navbar } from "@/components/Navbar";
-import { withAuthInfo, WithAuthInfoProps } from "@propelauth/react";
 import { BentoGridDemo } from "./FullBentoGrid";
+import { Background } from "./Background";
 
-// ===== USER DASHBOARD =====
-const Homepage = withAuthInfo((props: WithAuthInfoProps) => {
+export default function Homepage() {
   return (
     <>
-      <Navbar />
+      <Navbar />  
       <BentoGridDemo />
     </>
   );
-});
+}
 
-export default Homepage;
