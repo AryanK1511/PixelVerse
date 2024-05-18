@@ -9,11 +9,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthProvider authUrl={process.env.NEXT_PUBLIC_AUTH_URL!}>
-<html lang="en">
-      <body>{children}</body>
-    </html>
-    </AuthProvider>
-    
+      
+        <html lang="en">
+          <AuthProvider authUrl={process.env.NEXT_PUBLIC_AUTH_URL!}>
+          <body>{children}</body>
+          </AuthProvider>
+        </html>
+      
   );
 }
