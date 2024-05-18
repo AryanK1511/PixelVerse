@@ -61,4 +61,29 @@ const getUserProjects = async (email) => {
   return { success: true, data: result.data };
 }
 
+// Add another image to the Dataset
+const addImage = async (datasetName, imageUrl) => {
+  // Fetch the data from the Database Integration API with the filter parameter
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_NEURELO_API_URL}/rest/Datasets/${datasetId}/images`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": process.env.NEXT_PUBLIC_NEURELO_API_KEY,
+      },
+      body: JSON.stringify({ url: imageUrl }),
+    },
+  );
+
+  if (!response.ok) {
+    return { success: false, message: "Error adding image" };
+  }
+
+  // Get the data from the response
+  const result = await response.json();
+
+  return { success: true, data: result.data };
+}
+
 export { getAllProjects, getUserProjects };
