@@ -21,6 +21,12 @@
     "react-dom": "^18",
     "react-element-to-jsx-string": "^15.0.0",
     "tailwind-merge": "^2.3.0"
+    "@google-cloud/storage": "^7.11.0",
+    "date-fns": "^3.6.0",
+    "mime": "^4.0.3",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",

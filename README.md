@@ -1,3 +1,1 @@
-# Hawk-Hacks-2024
-
-KKK
+# Hawk Hacks 2024
