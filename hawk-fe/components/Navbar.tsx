@@ -6,9 +6,8 @@ import { useLogoutFunction } from "@propelauth/react";
 import { useRouter } from "next/navigation";
 import { withAuthInfo, WithAuthInfoProps } from "@propelauth/react";
 
-// export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
-export const Navbar = () => {
-  // const logoutFunction = useLogoutFunction();
+export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
+  const logoutFunction = useLogoutFunction();
   const router = useRouter();
   const navItems: {
     name: string;
@@ -32,16 +31,16 @@ export const Navbar = () => {
   const navRedirect = (link: string) => {
     console.log(link);
     if (link === "/logout") {
-      // logoutFunction(true);
+      logoutFunction(true);
       return;
     }
     router.push(link);
   };
 
   useEffect(() => {
-    // if (!props.isLoggedIn) {
-    //   router.push("/");
-    // }
+    if (!props.isLoggedIn) {
+      router.push("/");
+    }
   }, []);
   return (
     <AnimatePresence mode="wait">
@@ -78,4 +77,4 @@ export const Navbar = () => {
       </motion.div>
     </AnimatePresence>
   );
-};
+});
