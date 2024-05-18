@@ -4,6 +4,8 @@ import { Navbar } from "@/components/Navbar";
 import { Background } from "@/components/Background";
 import ImageCards from "@/components/ImageCards";
 import Button from "@/components/Button";
+import { AuthProvider } from "@propelauth/react";
+
 
 export default function page() {
   const mockCardsProps: CardProps[] = [
@@ -40,7 +42,7 @@ export default function page() {
     // Add more mock data as needed
   ];
   return (
-    <>
+    <AuthProvider authUrl={process.env.NEXT_PUBLIC_AUTH_URL!}>
       <Background className="w-screen h-full min-h-screen">
         <Navbar />
         <ImageCards
@@ -49,6 +51,6 @@ export default function page() {
         />
         <Button text="+" className="my-10" />
       </Background>
-    </>
+    </AuthProvider>
   );
 }

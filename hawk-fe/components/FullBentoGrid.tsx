@@ -20,7 +20,12 @@ const style = {
 };
 export function BentoGridDemo() {
   const [gemError, setGemError] = React.useState("");
-  const [item, setItem] = React.useState({});
+  const [item, setItem] = React.useState<{
+    title: string;
+    description: string;
+    header: React.ReactNode;
+    icon: React.ReactNode;
+  }>({title: "", description: "", header: "", icon: ""});
   const [open, setOpen] = React.useState(false);
   const handleOpen = (item:any) => {
     setItem(item);

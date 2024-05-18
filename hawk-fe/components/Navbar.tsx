@@ -16,7 +16,7 @@ export const Navbar = withAuthInfo((props: WithAuthInfoProps) => {
   }[] = [
     {
       name: "Home",
-      link: "/",
+      link: "/home",
     },
     {
       name: "My Projects",
