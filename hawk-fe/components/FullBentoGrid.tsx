@@ -112,7 +112,7 @@ export const BentoGridDemo = withAuthInfo((props: WithAuthInfoProps) => {
     <BentoGrid className="max-w-4xl mx-auto mt-24">
       {projects.map((project, i) => (
         <BentoGridItem
-          onClick={() => handleOpen(item)}
+          onClick={() => handleOpen(project)}
           key={i}
           title={project.title}
           description={project.description}
@@ -123,7 +123,6 @@ export const BentoGridDemo = withAuthInfo((props: WithAuthInfoProps) => {
       ))}
     </BentoGrid>
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -135,8 +134,16 @@ export const BentoGridDemo = withAuthInfo((props: WithAuthInfoProps) => {
             {item.title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {item.description}
+            Created By: {item.createdBy}
           </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Points: {item.pointsPerImage}
+          </Typography>
+          {
+            item.sampleImages?.map((img, i) => (
+              <a href={img} target="_blank" key={i}>Image {i+1}, </a>
+            ))
+          }
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Upload your Image here:
           </Typography>
@@ -155,7 +162,7 @@ export const BentoGridDemo = withAuthInfo((props: WithAuthInfoProps) => {
 
     </>
   );
-}
+});
 
 const Skeleton = ({img_link}) => (
   <img
