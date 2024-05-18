@@ -23,6 +23,7 @@ const style = {
   p: 4,
 };
 
+
 export const BentoGridDemo = withAuthInfo((props: WithAuthInfoProps) => {
   const [gemError, setGemError] = React.useState("");
   const [item, setItem] = React.useState<{
@@ -109,14 +110,14 @@ export const BentoGridDemo = withAuthInfo((props: WithAuthInfoProps) => {
   return (
     <>
     <BentoGrid className="max-w-4xl mx-auto mt-24">
-      {projects && projects.map((item, i) => (
+      {projects.map((project, i) => (
         <BentoGridItem
           onClick={() => handleOpen(item)}
           key={i}
-          title={item.name}
-          description={item.description}
-          // header={item.sampleImages[0]}
-          // icon={item.points}
+          title={project.title}
+          description={project.description}
+          header={<Skeleton img_link={project.sampleImages[0]}/>}
+          icon={<span>{project.pointsPerImage} P$</span>}
           className={i === 3 || i === 6 ? "md:col-span-2" : ""}
         />
       ))}
@@ -156,11 +157,56 @@ export const BentoGridDemo = withAuthInfo((props: WithAuthInfoProps) => {
   );
 }
 
-);
-const Skeleton = () => (
+const Skeleton = ({img_link}) => (
   <img
-    src="demo1.png"
+    src={img_link}
     className="object-cover flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"
   ></img>
 );
+
+const items = [
+  {
+    title: "The Dawn of Innovation",
+    description: "Explore the birth of groundbreaking ideas and inventions.",
+    header: <Skeleton img_link="demo1.png"/>,
+    icon: <span>100 P$</span>,
+  },
+  {
+    title: "The Digital Revolution",
+    description: "Dive into the transformative power of technology.",
+    header: <Skeleton img_link="demo1.png"/>,
+    icon: <span>100 P$</span>,
+  },
+  {
+    title: "The Art of Design",
+    description: "Discover the beauty of thoughtful and functional design.",
+    header: <Skeleton img_link="demo1.png"/>,
+    icon: <span>100 P$</span>,
+  },
+  {
+    title: "The Power of Communication",
+    description:
+      "Understand the impact of effective communication in our lives.",
+    header: <Skeleton img_link="demo1.png"/>,
+    icon: <span>100 P$</span>,
+  },
+  {
+    title: "The Pursuit of Knowledge",
+    description: "Join the quest for understanding and enlightenment.",
+    header: <Skeleton img_link="demo1.png"/>,
+    icon: <span>100 P$</span>,
+  },
+  {
+    title: "The Joy of Creation",
+    description: "Experience the thrill of bringing ideas to life.",
+    header: <Skeleton img_link="demo1.png"/>,
+    icon: <span>100 P$</span>,
+  },
+  {
+    title: "The Spirit of Adventure",
+    description: "Embark on exciting journeys and thrilling discoveries.",
+    header: <Skeleton img_link="demo1.png"/>,
+    icon: <span>100 P$</span>,
+  },
+];
 
