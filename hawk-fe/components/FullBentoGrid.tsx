@@ -35,8 +35,9 @@ export function BentoGridDemo() {
 
   const [imageUrl, setImageUrl] = useState(null as string | null);
 
-    const onImageFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-        const fileInput = e.target;
+    const onSubmit = async () => {
+
+        const fileInput = document.getElementById("upload-image") as HTMLInputElement;
 
         if (!fileInput.files) {
             console.warn("no file was chosen");
@@ -72,10 +73,6 @@ export function BentoGridDemo() {
         } catch (error) {
             console.error("something went wrong, check your console.");
         }
-
-        /** Reset file input */
-        e.target.type = "text";
-        e.target.type = "file";
     };
 
   return (
@@ -112,12 +109,14 @@ export function BentoGridDemo() {
             Upload your Image here:
           </Typography>
           <input
+            id="upload-image"
             type="file"
-            onChange={onImageFileChange}
           />
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {gemError}
           </Typography>
+          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={onSubmit}>Upload</Button>
         </Box>
       </Modal>
     </div>
