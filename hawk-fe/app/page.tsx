@@ -4,7 +4,6 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import { FlipWords } from "@/components/FlipWords";
 import Button from "@/components/Button";
-import { userAuth } from "@/utils/lib";
 
 // ===== HOMEPAGE =====
 export default function Home() {

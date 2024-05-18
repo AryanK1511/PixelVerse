@@ -43,7 +43,7 @@ export const BentoGridDemo = withAuthInfo((props: WithAuthInfoProps) => {
 
   // Set state to store the projects
   const [projects, setProjects] = React.useState<any[]>([]);
-  const[items, setItems] = React.useState<any[]>([]);
+  
 
   // Get the user email from the props
   const email = props.user?.email;
