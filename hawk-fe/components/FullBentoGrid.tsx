@@ -1,4 +1,3 @@
-import { cn } from "./cn";
 import React from "react";
 import { BentoGrid, BentoGridItem } from "./BentoGrid";
 import {
@@ -35,43 +34,43 @@ const items = [
     title: "The Dawn of Innovation",
     description: "Explore the birth of groundbreaking ideas and inventions.",
     header: <Skeleton />,
-    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
+    icon: <span>100 P$</span>,
   },
   {
     title: "The Digital Revolution",
     description: "Dive into the transformative power of technology.",
     header: <Skeleton />,
-    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
+    icon: <span>100 P$</span>,
   },
   {
     title: "The Art of Design",
     description: "Discover the beauty of thoughtful and functional design.",
     header: <Skeleton />,
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
+    icon: <span>100 P$</span>,
   },
   {
     title: "The Power of Communication",
     description:
       "Understand the impact of effective communication in our lives.",
     header: <Skeleton />,
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
+    icon: <span>100 P$</span>,
   },
   {
     title: "The Pursuit of Knowledge",
     description: "Join the quest for understanding and enlightenment.",
     header: <Skeleton />,
-    icon: <IconArrowWaveRightUp className="h-4 w-4 text-neutral-500" />,
+    icon: <span>100 P$</span>,
   },
   {
     title: "The Joy of Creation",
     description: "Experience the thrill of bringing ideas to life.",
     header: <Skeleton />,
-    icon: <IconBoxAlignTopLeft className="h-4 w-4 text-neutral-500" />,
+    icon: <span>100 P$</span>,
   },
   {
     title: "The Spirit of Adventure",
     description: "Embark on exciting journeys and thrilling discoveries.",
     header: <Skeleton />,
-    icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
+    icon: <span>100 P$</span>,
   },
 ];

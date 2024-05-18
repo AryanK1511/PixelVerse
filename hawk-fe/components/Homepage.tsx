@@ -1,11 +1,7 @@
 "use client";
-import { Background } from "@/components/Background";
-import Button from "@/components/Button";
 import { CardProps, ImageCard } from "@/components/ImageCard";
-import ImageCards from "@/components/ImageCards";
 import { Navbar } from "@/components/Navbar";
 import { BentoGridDemo } from "./FullBentoGrid";
-import { BackgroundGradient } from "./BackgroundGradient";
 
 export default function Homepage() {
   const mockCardsProps: CardProps[] = [
