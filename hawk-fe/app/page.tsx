@@ -1,26 +1,39 @@
 "use client";
+import { Background } from "@/components/Background";
+import { BackgroundGradient } from "@/components/BackgroundGradient";
 import Button from "@/components/Button";
+import { Card, CardTitle } from "@/components/Card";
 import { Navbar } from "@/components/Navbar";
-import Image from "next/image";
 
 export default function Home() {
-  const navItems = [
-    {
-      name: "Home",
-      link: "/",
-    },
-    {
-      name: "Signup",
-      link: "/signup",
-    },
-  ];
   return (
-    <main>
-      <Navbar navItems={navItems} />
-      <div className="flex justify-around">
-        <Button className="mt-80">User</Button>
-        <Button className="mt-80">Business</Button>
+    <Background className="w-screen h-screen">
+      <div className="flex justify-around w-screen">
+        <div className="w-[20%] flex flex-col items-center">
+          <BackgroundGradient>
+            <Card>
+              <CardTitle>
+                Lorem Ipsum Generator Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna.
+              </CardTitle>
+              <Button className="flex items-center mt-5">User</Button>
+            </Card>
+          </BackgroundGradient>
+        </div>
+        <div className="w-[20%] flex flex-col items-center">
+          <BackgroundGradient>
+            <Card>
+              <CardTitle>
+                Lorem Ipsum Generator Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna.
+              </CardTitle>
+              <Button className="flex items-center mt-5">Business</Button>
+            </Card>
+          </BackgroundGradient>
+        </div>
       </div>
-    </main>
+    </Background>
   );
 }

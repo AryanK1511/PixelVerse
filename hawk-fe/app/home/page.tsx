@@ -1,6 +1,7 @@
-"use-client";
-import React from "react";
+"use client";
+import Business from "@/components/Business";
+import User from "@/components/User";
 
-export default function page() {
-  return <div>Hello, user</div>;
+export default function Home() {
+  return <Business />;
 }
