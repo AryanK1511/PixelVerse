@@ -15,4 +15,3 @@ const Homepage = withAuthInfo((props: WithAuthInfoProps) => {
 });
 
 export default Homepage;
-

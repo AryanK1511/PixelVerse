@@ -4,59 +4,54 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
 export default function FileUploader() {
-        const [imageUrl, setImageUrl] = useState(null as string | null);
+  const [imageUrl, setImageUrl] = useState(null as string | null);
 
-    const onImageFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-        const fileInput = e.target;
+  const onImageFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const fileInput = e.target;
 
-        if (!fileInput.files) {
-            console.warn("no file was chosen");
-            return;
-        }
+    if (!fileInput.files) {
+      console.warn("no file was chosen");
+      return;
+    }
 
-        if (!fileInput.files || fileInput.files.length === 0) {
-            console.warn("files list is empty");
-            return;
-        }
+    if (!fileInput.files || fileInput.files.length === 0) {
+      console.warn("files list is empty");
+      return;
+    }
 
-        const file = fileInput.files[0];
+    const file = fileInput.files[0];
 
-        const formData = new FormData();
-        formData.append("file", file);
+    const formData = new FormData();
+    formData.append("file", file);
 
-        try {
-            const res = await fetch("/api/image", {
-                method: "POST",
-                body: formData,
-            });
+    try {
+      const res = await fetch("/api/image", {
+        method: "POST",
+        body: formData,
+      });
 
-            if (!res.ok) {
-                console.error("something went wrong, check your console.");
-                return;
-            }
+      if (!res.ok) {
+        console.error("something went wrong, check your console.");
+        return;
+      }
 
-            const data: { fileUrl: string } = await res.json();
+      const data: { fileUrl: string } = await res.json();
 
-            setImageUrl(data.fileUrl);
-        } catch (error) {
-            console.error("something went wrong, check your console.");
-        }
+      setImageUrl(data.fileUrl);
+    } catch (error) {
+      console.error("something went wrong, check your console.");
+    }
 
-        /** Reset file input */
-        e.target.type = "text";
-        e.target.type = "file";
-    };
+    /** Reset file input */
+    e.target.type = "text";
+    e.target.type = "file";
+  };
 
-    return (
-        <label>
-        THis is an unput 
-        <input
-            type="file"
-            onChange={onImageFileChange}
-        />
-
-
-        {/* <div className="flex items-center justify-center w-full">
+  return (
+    <label>
+      THis is an unput
+      <input type="file" onChange={onImageFileChange} />
+      {/* <div className="flex items-center justify-center w-full">
             <label for="dropzone-file" className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -68,8 +63,6 @@ export default function FileUploader() {
                 <input id="dropzone-file" type="file" className="hidden" />
             </label>
         </div>  */}
-
-        
-        </label>
-    );
+    </label>
+  );
 }
