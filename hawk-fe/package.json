@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@propelauth/nextjs": "^0.1.2",
+    "@propelauth/react": "^2.0.21",
     "@tabler/icons-react": "^3.4.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.4",
