@@ -3,6 +3,10 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Background } from "@/components/Background";
+import { BackgroundGradient } from "@/components/BackgroundGradient";
+import { Card, CardTitle } from "@/components/Card";
+import { Navbar } from "@/components/Navbar";
 
 
 export default function Home() {
@@ -22,12 +26,33 @@ export default function Home() {
     console.log(process.env.REACT_APP_AUTH_URL!);
   }, []);
   return (
-      <main className="mt-2">
-        <div className="flex justify-around">
-          <button onClick={userLogin}>User</button>
-          <button onClick={businessLogin}>Business</button>
+    <Background className="w-screen h-screen">
+      <div className="flex justify-around w-screen">
+        <div className="w-[20%] flex flex-col items-center">
+          <BackgroundGradient>
+            <Card>
+              <CardTitle>
+                Lorem Ipsum Generator Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna.
+              </CardTitle>
+              <Button className="flex items-center mt-5" onClick={userLogin}>User</Button>
+            </Card>
+          </BackgroundGradient>
         </div>
-      </main>
-
+        <div className="w-[20%] flex flex-col items-center">
+          <BackgroundGradient>
+            <Card>
+              <CardTitle>
+                Lorem Ipsum Generator Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna.
+              </CardTitle>
+              <Button className="flex items-center mt-5" onClick={businessLogin}>Business</Button>
+            </Card>
+          </BackgroundGradient>
+        </div>
+      </div>
+    </Background>
   );
 }
