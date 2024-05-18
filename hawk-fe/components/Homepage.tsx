@@ -4,6 +4,8 @@ import Button from "@/components/Button";
 import { CardProps, ImageCard } from "@/components/ImageCard";
 import ImageCards from "@/components/ImageCards";
 import { Navbar } from "@/components/Navbar";
+import { BentoGridDemo } from "./FullBentoGrid";
+import { BackgroundGradient } from "./BackgroundGradient";
 
 export default function Homepage() {
   const mockCardsProps: CardProps[] = [
@@ -40,13 +42,21 @@ export default function Homepage() {
     // Add more mock data as needed
   ];
   return (
+    <>
+    <Navbar />
+    
+    <BentoGridDemo />
+  
+    {/*
     <Background className="w-screen h-full min-h-screen">
       <Navbar />
       <ImageCards
-        className="grid grid-cols-3 gap-x-4 gap-y-16 pt-20"
+        className="grid grid-cols-3 gap-x-16 gap-y-20 pt-20"
         cardsProps={mockCardsProps}
       />
       <Button className="my-10">+</Button>
     </Background>
+    */}
+    </>
   );
 }
