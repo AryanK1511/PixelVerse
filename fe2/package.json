@@ -14,6 +14,7 @@
     "@propelauth/react": "^2.0.21",
     "framer-motion": "^11.2.4",
     "next": "^14.2.3",
+    "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18"
   },
