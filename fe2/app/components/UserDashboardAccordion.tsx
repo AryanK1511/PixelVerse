@@ -39,6 +39,7 @@ const UserDashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
             height={300}
             />
             
+        <h2 className='mt-4 text-2xl font-bold'>Your Projects:</h2>
         <AddProject />
       <Accordion selectionMode="multiple">
         {

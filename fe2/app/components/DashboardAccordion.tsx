@@ -77,6 +77,7 @@ const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
     }, [])
     return (
     <>
+    <h2 className='mb-4 text-3xl font-bold'>Open Projects:</h2>
     <Accordion selectionMode="multiple">
         {
             projects.map((project, i) => {
