@@ -1,6 +1,6 @@
 // Function to authenticate the user and store in the database
 const storeUserDetailsAfterAuthentication = async (email: string) => {
-    // Create the filter parameter
+  // Create the filter parameter
   const filter = JSON.stringify({
     email: {
       equals: email,
@@ -41,7 +41,7 @@ const storeUserDetailsAfterAuthentication = async (email: string) => {
         },
         body: JSON.stringify({
           email: email,
-          points: "0"
+          points: "0",
         }),
       },
     );

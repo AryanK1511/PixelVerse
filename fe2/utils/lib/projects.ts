@@ -61,31 +61,6 @@ const getUserProjects = async (email) => {
   return { success: true, data: result.data };
 }
 
-// Add another image to the Dataset
-const addImage = async (datasetName, imageUrl) => {
-  // Fetch the data from the Database Integration API with the filter parameter
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_NEURELO_API_URL}/rest/Datasets/${datasetId}/images`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-KEY": process.env.NEXT_PUBLIC_NEURELO_API_KEY,
-      },
-      body: JSON.stringify({ url: imageUrl }),
-    },
-  );
-
-  if (!response.ok) {
-    return { success: false, message: "Error adding image" };
-  }
-
-  // Get the data from the response
-  const result = await response.json();
-
-  return { success: true, data: result.data };
-}
-
 // Add a new project
 const addProject = async (project:any) => {
   console.log(project);
@@ -125,37 +100,5 @@ const addProject = async (project:any) => {
 
   return { success: true, data: result.data };
 }
-
-// Function to return the points of the project
-const getPoints = async (email:string) => {
-  // Filter to get the points of the project
-    const filter = JSON.stringify({
-      email: {
-        equals: email,
-      },
-    });
-
-    // Fetch data from the Database Integration API with filter parameter
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_NEURELO_API_URL}/rest/Users?filter=${encodeURIComponent(filter)}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "X-API-KEY": process.env.NEXT_PUBLIC_NEURELO_API_KEY,
-        },
-      },
-    );
-
-    if (!response.ok) {
-      return { success: false, message: "Error fetching data" };
-    }
-
-    // Get the data from the response
-    const result = await response.json();
-
-    return { success: true, data: result.data[0].points };
-}
-
 
 export { getAllProjects, getUserProjects, addProject, getPoints };
