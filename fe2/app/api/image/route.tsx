@@ -1,9 +1,8 @@
 import mime from "mime";
 import { join } from "path";
 import { stat, mkdir, writeFile, unlink } from "fs/promises";
-import * as dateFn from "date-fns";
 import { NextRequest, NextResponse } from "next/server";
-import { getImage, uploadImage } from "@/google/bucket";
+import { getImage, uploadImage } from "@/utils/google/bucket"
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
@@ -19,6 +18,7 @@ export async function POST(request: NextRequest) {
   const buffer = Buffer.from(await file.arrayBuffer());
   const relativeUploadDir = `/uploads`;
   const uploadDir = join(process.cwd(), "public", relativeUploadDir);
+  let urlPhoto = null;
 
   try {
     await stat(uploadDir);
@@ -49,14 +49,28 @@ export async function POST(request: NextRequest) {
     await writeFile(`${uploadDir}/${filename}`, buffer);
 
     // upload the photo to google bucket
-    uploadImage(`${uploadDir}/${filename}`, filename)
-      .then(() => {
-        // get link to the photo
-        getImage(filename).then((url: any) => {
+    console.log(1)
+    await uploadImage(`${uploadDir}/${filename}`, filename)
+      .then(async () => {
+    console.log(2)
+    // get link to the photo
+        await getImage(filename)
+        .then((url: any) => {
+          console.log(3, url)
+          urlPhoto = url
           return NextResponse.json({ url: url });
+        })
+        .catch((e: any) => {
+          console.log(4)
+          console.error("Error while trying to get the image url\n", e);
+          return NextResponse.json(
+            { error: "Error with google" },
+            { status: 400 },
+          );
         });
       })
       .catch((e: any) => {
+        console.log(5)
         console.error("Error while trying to upload a file\n", e);
         return NextResponse.json(
           { error: "Error with google" },
@@ -64,7 +78,8 @@ export async function POST(request: NextRequest) {
         );
       });
 
-    return NextResponse.json({ fileUrl: `error` });
+      console.log(6)
+    return NextResponse.json({ url: urlPhoto });
   } catch (e) {
     console.error("Error while trying to upload a file\n", e);
     return NextResponse.json(
