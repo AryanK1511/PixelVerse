@@ -20,14 +20,14 @@ const Nav = (props: WithAuthInfoProps) => {
 
     // Store the user details after authentication
     async function storeUserDetails() {
-      const response = await storeUserDetailsAfterAuthentication(props.user.email);
+      const response = await storeUserDetailsAfterAuthentication(props.user?.email!);
       if (!response.success) {
         console.error(response.message);
       }
     }
 
     storeUserDetails();
-  }, [props.isLoggedIn]);
+  }, [props.isLoggedIn, props.user?.email, router]);
 
   const handleLogout = () => {
     logoutFunction(true);
@@ -41,8 +41,8 @@ const Nav = (props: WithAuthInfoProps) => {
       </NavbarBrand>
       <NavbarContent justify="center" className="flex gap-4">
         <NavbarItem>
-          <Link href="/projects" className="nav-link-1">
-            My Projects
+          <Link href="#" className="nav-link-1">
+            About Us
           </Link>
         </NavbarItem>
         <NavbarItem>

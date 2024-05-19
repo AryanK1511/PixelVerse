@@ -16,7 +16,7 @@ const UserDashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
           }
         }
         fetchData();
-      }, [])
+      }, [props.user?.email])
     return (
     <>
       <Accordion selectionMode="multiple">
