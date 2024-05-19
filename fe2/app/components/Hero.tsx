@@ -4,6 +4,39 @@ import React from 'react';
 
 
 const Hero = () => {
+    const [numUsers, setNumUsers] = React.useState<number>(29);
+    const [numProjects, setNumProjects] = React.useState<number>(14);
+
+    React.useEffect(() => {
+      if(localStorage.getItem("numUsers") && localStorage.getItem("numProjects")) {
+        console.log("Values already set in local storage");
+        setNumUsers(parseInt(localStorage.getItem("numUsers")!));
+        setNumProjects(parseInt(localStorage.getItem("numProjects")!));
+      }
+      fetch("/api/createUser").then((res) => res.json()).then((res) =>{
+        if(res.ok) {
+          setNumUsers(res.calls);
+          localStorage.setItem("numUsers", (res.calls).toString());
+          console.log("Num Users: ", res.calls);
+        }
+        else if (res.calls) {
+            setNumUsers(res.calls);
+            localStorage.setItem("numUsers", (res.calls).toString());
+        }
+      }).catch((err) => console.log(err));
+      fetch("/api/createProject").then((res) => res.json()).then((res) =>{
+        if(res.ok) {
+          setNumProjects(res.calls);
+          localStorage.setItem("numProjects", (res.calls).toString());
+          console.log("Num Projects: ", res.calls);
+        }
+        else if(res.calls) {
+            setNumProjects(res.calls);
+            localStorage.setItem("numProjects", (res.calls).toString());
+        }
+      }).catch((err) => console.log(err));
+    }, []);
+
     const router = useRouter();
     const handleSignIn = async () => {
       router.push(process.env.NEXT_PUBLIC_AUTH_URL!);
@@ -21,6 +54,12 @@ const Hero = () => {
             The industry standard tool for{" "}
             <span className="text-transparent bg-gradient-to-tr from-yellow-600 to-purple-600 bg-clip-text">
               Hackers, ML Enthusiasts, and Data Scientists.
+            </span>
+          </p>
+          <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
+            In the last 24 Hours, We&apos;ve had{" "}
+            <span className="text-transparent bg-gradient-to-tr from-yellow-600 to-purple-600 bg-clip-text">
+                {numProjects} Projects Created & {numUsers} Users Sign-up.
             </span>
           </p>
             <Button color="default" onClick={handleSignIn}>Get started</Button>
