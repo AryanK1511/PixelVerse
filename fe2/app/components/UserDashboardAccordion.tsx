@@ -18,6 +18,9 @@ const UserDashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
   const [tokens, setTokens] = React.useState<number>(0);
 
   const boostPoints = async (project: any) => {
+    if(tokens < 500) {
+        return;
+    }
     const result2 = await fetch(
         `${process.env.NEXT_PUBLIC_NEURELO_API_URL}/rest/Users?filter=${encodeURIComponent(JSON.stringify({ email: props.user?.email }))}`,
         {

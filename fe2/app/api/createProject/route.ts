@@ -12,8 +12,8 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
     await page.goto("https://dashboard.neurelo.com/sign-in");
     await page.waitForSelector('input[name="identifier"]');
 
-    await page.type('input[name="identifier"]', process.env.NEXT_PUBLIC_NEURELO_USR);
-    await page.type('input[name="password"]', process.env.NEXT_PUBLIC_NEURELO_PWD);
+    await page.type('input[name="identifier"]', process.env.NEXT_PUBLIC_NEURELO_USR!);
+    await page.type('input[name="password"]', process.env.NEXT_PUBLIC_NEURELO_PWD!);
     await page.click("#button-1010001");
 
     await page.waitForNavigation();

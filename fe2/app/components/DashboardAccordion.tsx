@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import {Accordion, AccordionItem, Avatar, Button, Link} from "@nextui-org/react";
-import { getAllProjects } from "../../utils/lib/projects";
+import { getAllProjects } from "../utils/projects";
 import { WithAuthInfoProps, withAuthInfo } from '@propelauth/react';
 import { updateProject } from '../utils/projects';
 import {Spinner} from "@nextui-org/react";
+import { useRouter } from 'next/navigation';
 
 const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
     const [projects, setProjects] = React.useState<any[]>([]);
     const [gemError, setGemError] = React.useState("");
     const [imageUrl, setImageUrl] = React.useState("");
     const [loading, setLoading] = React.useState(false);
+
+    const router = useRouter();
 
     const onSubmit = async (project: any) => {
         setLoading(true);
@@ -70,18 +73,21 @@ const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
                         uploadedImages: project.uploadedImages.concat(data.url),
                     }
 
-                const resp = await updateProject(project.id, projectt, props.user?.email!);
+                    const resp = await updateProject(project.id, projectt, props.user?.email!);
 
-                console.log(resp);  
-                if (!resp.success) {
-                    setGemError(resp.message!);
-                }
+                    console.log(resp);  
+                    if (!resp.success) {
+                        setGemError(resp.message!);
+                        return;
+                    }
+                    setGemError("");
 
                 } else {
                     setGemError("Image is not valid - Gemini returned false.");
                     console.log("Image is not valid - Gemini returned false.");
                     setImageUrl(data.url);
                     setLoading(false);
+                    return;
                 }
 
             } else {
@@ -105,10 +111,10 @@ const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
         }
         }
         fetchData();
-    }, [])
+    }, [projects, props.user?.email])
     return (
     <>
-    <h2 className='mb-4 text-3xl font-bold'>Open Projects:</h2>
+    <h2 className='mb-4 text-3xl font-bold'>Community Projects:</h2>
     <Accordion selectionMode="multiple">
         {
             projects.map((project, i) => {

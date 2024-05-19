@@ -82,6 +82,7 @@ const AddProject = withAuthInfo((props: WithAuthInfoProps) => {
             }
             setuploadError("");
             onClose();
+            window.location.reload();
             return;
         } catch (error) {
             console.error("something went wrong, check your console.");
