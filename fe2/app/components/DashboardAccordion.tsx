@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {Accordion, AccordionItem, Avatar, Button, Link} from "@nextui-org/react";
 import { getAllProjects } from "../../utils/lib/projects";
 import { WithAuthInfoProps, withAuthInfo } from '@propelauth/react';
+import { updateProject } from '../utils/projects';
 
 const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
     const [projects, setProjects] = React.useState<any[]>([]);
@@ -44,10 +45,30 @@ const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
                 
                 // if the response if false, then the image is not valid
                 const dataGemini: any = await res.json();
-                if (dataGemini.response === "True") {
+                if (dataGemini.response == "True") {
                     setImageUrl(data.url);
                     console.log("Image is valid");
+
                     //save the image to the database
+                    const projectt: Project = {
+                        createdBy: project.createdby,
+                        dateCreated: project.dateCreated,
+                        isOpen: project.isOpen,
+                        maxImages: project.maxImages,
+                        name: project.name,
+                        description: project.description,
+                        pointsPerImage: project.pointsPerImage,
+                        sampleImages: project.sampleImages,
+                        totalCost: project.totalCost,
+                        uploadedImages: project.uploadedImages.concat(data.url),
+                    }
+
+                const resp = await updateProject(project.id, projectt);
+
+                console.log(resp);  
+                if (!resp.success) {
+                    setGemError(resp.message!);
+                }
 
                 } else {
                     setGemError("Image is not valid - Gemini returned false.");
