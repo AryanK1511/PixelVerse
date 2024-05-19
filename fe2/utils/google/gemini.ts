@@ -40,11 +40,13 @@ export default async function isValid(imageSample: [string], image: string, desc
     for (const image of imageSample) {
         arrayText += image.toString() + ', '
     }
-    const text1 = {text: `These are the images submitted by our client as the sample set [${arrayText}] (could be empty). the description is ${description}.
-    We are supposed to give them photos that are similar to this. This photo may be not related and you will have to flag this image and tell if this would make our client happy.
-    Just return a boolean (true or false) stating if its a match, the first word should be boolean and no other text is needed. our image -> ${image}
-    the urls could be empty or null or not here or there, even though compare it with the tpye of data needed and absolutly dont send any other data than the boolean.
+    const text1 = {text: `We are a company that helps other companies find sample datasets for their ai vision models. 
+    The company provides us with a sample set of images that would like to have more of with a description of what they are looking for.
+    The sample set includes ${description} in the following array [${arrayText}]. This is  the photo that we are going to submit -> ${image}
+    This photo may not be related to what the client wants and you will have to detect that. Return a boolean (true or false) stating if its a valid image
+    , the first word should be boolean and no other text is needed. our image -> ${image}, and absolutly dont send any other data than the boolean.
     NEVER SEND ANYTHING ELSE, JUST THE BOOLEAN. TRUE OR FALSE`};
+        
 
     const req =  {
         contents: [
