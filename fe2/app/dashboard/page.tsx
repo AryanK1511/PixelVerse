@@ -10,12 +10,12 @@ export default function Dashboard() {
     <>
       <Nav />
       <div className="container mx-auto px-4 min-h-[100vh]">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-5">
           <div className="col-span-1 mt-32">
             <DashboardInfo />
             <UserDashboardAccordion />
           </div>
-          <div className="col-span-2 mt-32">
+          <div className="col-span-2 mt-32 ml-20">
             <DashboardAccordion />
           </div>
         </div>

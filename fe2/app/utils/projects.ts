@@ -1,3 +1,5 @@
+import { Pragati_Narrow } from "next/font/google";
+
 // Get all the projects on the website except for your own
 const getAllProjects = async (email) => {
     const filter = JSON.stringify({
@@ -131,8 +133,10 @@ const getAllProjects = async (email) => {
   };
   
   const createProject = async (project) => {
+    console.log("The project:");
+    console.log(project);
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_NEURELO_API_URL}/rest/Datasets`,
+      `${process.env.NEXT_PUBLIC_NEURELO_API_URL}/rest/Datasets/__one`,
       {
         method: "POST",
         headers: {
@@ -141,7 +145,7 @@ const getAllProjects = async (email) => {
         },
         body: JSON.stringify({
           createdBy: project.createdBy,
-          dateCreated: "2024-05-18T15:30:00.000Z",
+          dateCreated: project.dateCreated,
           description: project.description,
           isOpen: true,
           maxImages: project.maxImages,
@@ -153,13 +157,16 @@ const getAllProjects = async (email) => {
         }),
       },
     );
+
+    
   
     if (!response.ok) {
+      console.log(response);
       return { success: false, message: "Error adding project" };
     }
   
     const result = await response.json();
-  
+    console.log(result);
     console.log(result.data);
   
     return { success: true, data: result.data };

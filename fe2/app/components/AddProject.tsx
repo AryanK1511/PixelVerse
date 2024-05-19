@@ -2,9 +2,24 @@ import React from 'react';
 import { WithAuthInfoProps, withAuthInfo } from '@propelauth/react';
 import { Input, Button } from '@nextui-org/react';
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/modal";
+import { addProject } from '../utils/projects';
+
+interface Project {
+    createdBy: string;
+    dateCreated: string;
+    isOpen: boolean;
+    maxImages: number;
+    name: string;
+    description: string;
+    pointsPerImage: number;
+    sampleImages: string[];
+    totalCost: number;
+    uploadedImages: string[];
+}
 
 const AddProject = withAuthInfo((props: WithAuthInfoProps) => {
     const {isOpen, onOpen, onClose} = useDisclosure();
+    const [uploadError, setuploadError] = React.useState("");
 
     const handleOpen = () => {
         onOpen();
@@ -25,10 +40,10 @@ const AddProject = withAuthInfo((props: WithAuthInfoProps) => {
         const file = fileInput.files[0];
         const formData = new FormData();
         
-        formData.append("name", name);
-        formData.append("description", description);
-        formData.append("numberOfImages", numberOfImages);
-        formData.append("tokensAwarded", tokensAwarded);
+        //formData.append("name", name);
+        //formData.append("description", description);
+        //formData.append("numberOfImages", numberOfImages);
+        //formData.append("tokensAwarded", tokensAwarded);
         formData.append("file", file);
         
         try {
@@ -42,6 +57,30 @@ const AddProject = withAuthInfo((props: WithAuthInfoProps) => {
                 return;
             }
             const data: any = await res.json();
+
+            if(data.url) {
+                const project: Project = {
+                    createdBy: props.user?.email!,
+                    dateCreated: new Date().toISOString(),
+                    isOpen: true,
+                    maxImages: parseInt(numberOfImages),
+                    name: name,
+                    description: description,
+                    pointsPerImage: parseInt(tokensAwarded),
+                    sampleImages: data.url,
+                    totalCost: parseInt(tokensAwarded) * parseInt(numberOfImages),
+                    uploadedImages: [],
+                }
+                const resp = await addProject(project);
+                if (!resp.success) {
+                    setuploadError(resp.message!);
+                } 
+
+            } else {
+                console.log("Image is not valid - Unknow error.");
+                setuploadError(data.error);
+            }
+            setuploadError("");
             onClose();
             return;
         } catch (error) {
@@ -67,6 +106,7 @@ const AddProject = withAuthInfo((props: WithAuthInfoProps) => {
                 label="Project Name"
                 variant="bordered"
                 placeholder="Enter your project's name"
+                defaultValue='test'
                 onClear={() => console.log("input cleared")}
                 className="max-w-xs"
                 />
@@ -76,6 +116,7 @@ const AddProject = withAuthInfo((props: WithAuthInfoProps) => {
                 isRequired
                 type="text"
                 label="Project Description"
+                defaultValue='cartoon'
                 variant="bordered"
                 placeholder="Enter your project's description"
                 onClear={() => console.log("input cleared")}
@@ -89,7 +130,7 @@ const AddProject = withAuthInfo((props: WithAuthInfoProps) => {
                 label="Number of Images Required"
                 variant="bordered"
                 placeholder="Enter the number of tokens awarded per image"
-                defaultValue="10000"
+                defaultValue="1000"
                 onClear={() => console.log("input cleared")}
                 className="max-w-xs"
                 />
@@ -118,6 +159,7 @@ const AddProject = withAuthInfo((props: WithAuthInfoProps) => {
                 <Button color="primary" onPress={submitProject}>
                   Submit
                 </Button>
+                {uploadError && <p className='text-red-600'>{uploadError}</p>}
               </ModalFooter>
             </>
           )}

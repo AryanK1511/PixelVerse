@@ -4,13 +4,16 @@ import { getUserProjects } from "../../utils/lib/projects";
 import { WithAuthInfoProps, withAuthInfo } from '@propelauth/react';
 import AddProject from './AddProject';
 import { LineChart } from '@mui/x-charts/LineChart';
+import { getPoints } from '../../utils/lib/projects';
 
 const UserDashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
     const [projects, setProjects] = React.useState<any[]>([]);
     const [tokens, setTokens] = React.useState<number>(0);
 
     useEffect(() => {
-        //setTokens(getTokens(props.user?.email!))
+        getPoints(props.user?.email!).then((res) => {
+            setTokens(res.data);
+        });
         async function fetchData() {
           const response = await getUserProjects(props.user?.email!);    
           if (!response.success) {
