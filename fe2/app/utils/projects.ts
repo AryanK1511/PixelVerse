@@ -89,12 +89,6 @@ const getAllProjects = async (email) => {
   
     const existingProjects = existingProjectsResponse.data;
     const existingProject = existingProjects.find((p) => p.name === project.name);
-
-    console.log("Existing project:", existingProject);
-
-    // if (!existingProject) {
-    //   return createProject(project);
-    // }
   
     if (existingProject) {
       return updateProject(existingProject.id, project);
@@ -104,15 +98,10 @@ const getAllProjects = async (email) => {
   };
   
   const updateProject = async (projectId, project) => {
-    const filter = JSON.stringify({
-        createdBy: {
-          equals: project.createdBy,
-        },
-      });
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_NEURELO_API_URL}/rest/Datasets?filter=${encodeURIComponent(filter)}`,
+      `${process.env.NEXT_PUBLIC_NEURELO_API_URL}/rest/Datasets/${projectId}`,
       {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "X-API-KEY": process.env.NEXT_PUBLIC_NEURELO_API_KEY,
