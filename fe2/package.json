@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.18",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@mui/x-charts": "^7.5.0",
     "@nextui-org/modal": "^2.0.33",
     "@nextui-org/react": "^2.3.6",
     "@propelauth/nextjs": "^0.1.2",
@@ -17,7 +22,8 @@
     "next": "^14.2.3",
     "next-themes": "^0.3.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
     "@types/node": "^20",
