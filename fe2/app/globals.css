@@ -2,18 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* styles/globals.css */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Light theme colors */
+  --background-color: #ffffff;
+  --text-color: #000000;
+  /* Add more variables as needed */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+[data-theme="dark"] {
+  /* Dark theme colors */
+  --background-color: #000000;
+  --text-color: #ffffff;
+  /* Add more variables as needed */
 }
 
 body {

@@ -5,17 +5,29 @@ import Image from "next/image";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
 import { useLogoutFunction, withAuthInfo, WithAuthInfoProps } from "@propelauth/react";
 import { useRouter } from "next/navigation";
+import { storeUserDetailsAfterAuthentication } from "../utils/userAuth";
 
 // ==== NAVBAR COMPONENT ====
 const Nav = (props: WithAuthInfoProps) => {
   const logoutFunction = useLogoutFunction();
   const router = useRouter();
 
+  // Check if the user is logged in
   useEffect(() => {
     if (!props.isLoggedIn) {
       router.push("/");
+    } 
+
+    // Store the user details after authentication
+    async function storeUserDetails() {
+      const response = await storeUserDetailsAfterAuthentication(props.user?.email!);
+      if (!response.success) {
+        console.error(response.message);
+      }
     }
-  }, [props.isLoggedIn, router]);
+
+    storeUserDetails();
+  }, [props.isLoggedIn, props.user?.email, router]);
 
   const handleLogout = () => {
     logoutFunction(true);
@@ -29,8 +41,8 @@ const Nav = (props: WithAuthInfoProps) => {
       </NavbarBrand>
       <NavbarContent justify="center" className="flex gap-4">
         <NavbarItem>
-          <Link href="/projects" className="nav-link-1">
-            My Projects
+          <Link href="#" className="nav-link-1">
+            About Us
           </Link>
         </NavbarItem>
         <NavbarItem>
