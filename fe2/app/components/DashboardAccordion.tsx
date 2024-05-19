@@ -8,7 +8,7 @@ const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
     const [gemError, setGemError] = React.useState("");
     const [imageUrl, setImageUrl] = React.useState("");
 
-    const onSubmit = async () => {
+    const onSubmit = async (project: any) => {
         const fileInput = document.getElementById("upload-image") as HTMLInputElement;
         if (!fileInput.files || fileInput.files.length === 0) {
             console.warn("No file was chosen.");
@@ -28,10 +28,37 @@ const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
                 return;
             }
             const data: any = await res.json();
-            if(data.url)
-              setImageUrl(data.url);
-            else
+            console.log(data)
+            if(data.url) {
+                console.log("Image verification started");
+
+                const res = await fetch("/api/gemini", {
+                    method: "POST",
+                    body: JSON.stringify({ urls: project.sampleImages, url: data.url, description: data.description}),
+                });
+
+                if (!res.ok) {
+                    console.error("something went wrong, check your console.");
+                    return;
+                }
+                
+                // if the response if false, then the image is not valid
+                const dataGemini: any = await res.json();
+                if (dataGemini.response === "True") {
+                    setImageUrl(data.url);
+                    console.log("Image is valid");
+                    //save the image to the database
+
+                } else {
+                    setGemError("Image is not valid - Gemini returned false.");
+                    console.log("Image is not valid - Gemini returned false.");
+                    setImageUrl(data.url);
+                }
+
+            } else {
+                console.log("Image is not valid - Unknow error.");
                 setGemError(data.error);
+            }
         } catch (error) {
             console.error("something went wrong, check your console.");
         }
@@ -39,18 +66,18 @@ const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
 
     useEffect(() => {
         async function fetchData() {
-          const response = await getAllProjects(props.user?.email!);    
-          if (!response.success) {
-            console.error("Error fetching data");
-          } else {
-            setProjects(response.data);
-          }
+        const response = await getAllProjects(props.user?.email!);    
+        if (!response.success) {
+        console.error("Error fetching data");
+        } else {
+        setProjects(response.data);
+        }
         }
         fetchData();
-      }, [])
+    }, [])
     return (
     <>
-      <Accordion selectionMode="multiple">
+    <Accordion selectionMode="multiple">
         {
             projects.map((project, i) => {
                 return (
@@ -85,7 +112,7 @@ const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
                                 type="file"
                             />
                             <span className='font-bold mx-2'>{gemError}</span>
-                            <Button className="mb-2" onClick={onSubmit}>Upload</Button>
+                            <Button className="mb-2" onClick={()=>onSubmit(project)}>Upload</Button>
                         </div>
                         <div className="col-span-2">
                             <span className='font-bold mr-5'>Demo images provided:</span>

@@ -34,15 +34,17 @@ safetySettings: [
 
 
 
-export default async function generateContent(imageSample: [string], image: string) {
+export default async function isValid(imageSample: [string], image: string, description: string) {
 
     var arrayText = ''
     for (const image of imageSample) {
         arrayText += image.toString() + ', '
     }
-    const text1 = {text: `These are the images of butterfly submitted by our client as the sample set [${arrayText}]. 
+    const text1 = {text: `These are the images submitted by our client as the sample set [${arrayText}] (could be empty). the description is ${description}.
     We are supposed to give them photos that are similar to this. This photo may be not related and you will have to flag this image and tell if this would make our client happy.
-    Just return a boolean (true or false) stating if its a match, the first word should be boolean and no other text is needed. our image -> ${imageSample}`};
+    Just return a boolean (true or false) stating if its a match, the first word should be boolean and no other text is needed. our image -> ${image}
+    the urls could be empty or null or not here or there, even though compare it with the tpye of data needed and absolutly dont send any other data than the boolean.
+    NEVER SEND ANYTHING ELSE, JUST THE BOOLEAN. TRUE OR FALSE`};
 
     const req =  {
         contents: [
@@ -53,4 +55,5 @@ export default async function generateContent(imageSample: [string], image: stri
     const streamingResp = await generativeModel.generateContentStream(req);
     const json = await streamingResp.response;
     process.stdout.write('final response: ' + json.candidates[0].content.parts[0].text);
+    return json.candidates[0].content.parts[0].text;
 }
