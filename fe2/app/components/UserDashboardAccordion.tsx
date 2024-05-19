@@ -3,11 +3,14 @@ import {Accordion, AccordionItem, Avatar, Button, Link} from "@nextui-org/react"
 import { getUserProjects } from "../../utils/lib/projects";
 import { WithAuthInfoProps, withAuthInfo } from '@propelauth/react';
 import AddProject from './AddProject';
+import { LineChart } from '@mui/x-charts/LineChart';
 
 const UserDashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
     const [projects, setProjects] = React.useState<any[]>([]);
+    const [tokens, setTokens] = React.useState<number>(0);
 
     useEffect(() => {
+        //setTokens(getTokens(props.user?.email!))
         async function fetchData() {
           const response = await getUserProjects(props.user?.email!);    
           if (!response.success) {
@@ -20,6 +23,19 @@ const UserDashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
       }, [props.user?.email])
     return (
     <>
+        <h2 className='text-lg font-semibold mt-2'>Tokens Owned: {tokens}</h2>
+        <LineChart
+            xAxis={[{ data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }]}
+            series={[
+                {
+                data: [3, 5, 8, 3, 4, 1, 4, 7, 8, tokens/100],
+                showMark: ({ index }) => index % 2 === 0,
+                },
+            ]}
+            width={500}
+            height={300}
+            />
+            
         <AddProject />
       <Accordion selectionMode="multiple">
         {
