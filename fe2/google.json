@@ -1,0 +1,25 @@
+{
+
+    "type": "service_account",
+    
+    "project_id": "hawk-hacks",
+    
+    "private_key_id": "47a2a68b9ed894d15db5ae5d6068dcf18e46b6f2",
+    
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDWSpV2nSe9c5Bo\n4JFRPbszMA5oNByEd9XjzU++iDZ2DLiqHPNEtAn4HXzUc3mQF6e3RKOKD3vjE7c9\n8lQmc5I+G9ytVUVnM+aZxhgYhG2kv4SgjdqBq20fGhURtTLGhSTSTX9/YNFIAfId\nuVpl/iq1zOc8RvHlIGwfIbFI/bzZ+OiM27Ar8UV9ZZY93S9Thz/p4tEh2h8gDLDk\n6LK/a7YaBjbGOEaMx+kJBlGwqNpb56jSyN4njNZuvawSNCuH3/GsdP/XKVpMmRB3\nOFwoIIJ3X6etWiRLCxryC81zAsntAxm23PlaFrC653wy1g+5Ioc8EDmn6aqnW11X\nslBzLgkrAgMBAAECggEAE0gTVvo0Dn/P/iFt7ri88XgNy88bw8jOmTIRNOxa576K\nsFygTQD2jRM5XYDLohOaA5g5YncbNBopi9+tz7OCQXSbVvAlwwmWyPGPAhTxLEV2\nGkY5Sew4ineVbr1c0lakZghGhE0cKtXPlcbmsE4XqyBC32SyZ+X5CvuqncE31W4k\nc28KuF727TFa0lNW+YohwPImGX4xUoTIV0qJYwFTZDDtSJIefJr7+IQ6bp95zD5R\nfMKK+6Hh9GZ+CfdpqCq2hcgTbZ47ol2OZtkpojvo6JOIhiBf98UBmRTF6XSOIxRI\nr2LYvrFkSiwHgN7tsRUbJYfWc+qUQbkMShGIK5CVRQKBgQDwrxkGutfYFe3Kl7fr\nSKVjkA5mcyrAb/7EaogjfJgT36ymXsgWwQQmWe3LVkalnY1zR/eLsYBTbunuCevU\nQAiMYP7bvYudebTQP071qJQhqZ5MrOFTGKSrvRGjAsekJpk2yYR81keAteKDNmQw\nie8s6gloqb/ctQ7Xlnw3qEYNRwKBgQDj7YhTcxELY5McMGG8OP2Ue3PmV2m2sGE4\nqOCfnxdOM7hPFeMxZrJtRh6nDtPyPSj15D8Teqkpll8WJPnhWMPTYpeA0i/K9YJe\nqvcnf3oc0xEzMtOJbNfmKrPjwuqLLCZ1n8QQ3xveOjiFl0miXxkNW12Iqj7Kk9vd\nu+w4SeLG/QKBgHw0H9oVOaXNSzUtLkBA8Ph8MrIz5HACW5rIzxBhD6nR16rTZrY3\nTQjth4VTNInq0EAZd2mjY/GqXxX0ELsrgD3RIDQNkKrnT6PXx8uF/0uP2J0A6haT\ntQbbPuq8WIIhWReozrINckC9m/LScsmJpN+stsZIMzaWSN6ATgH62IupAoGBAIdI\n7pixfJVo9eFOakRhA0pFeEZo7essh5gszJ6RvDCDjEsMr7wbu54Wd40qxOxMFurU\nHgg+zvdLNIcdTV/O4vSt2UTx/MIXtNjh2y8Lf/xp3xSnf11bSE5qXDm88J/Ihc9d\nE+/7rTvbDL9mS6NflKwT5dF/UyPEXUUgDJZgbIU1AoGBAKk8i2W5nCqkBqSrwl+g\n0WXX/t2zymOqHhKj43pXTwKELrxGos0K0N/7K6PTD6RzNezzkRa6OJIjCpWo+N3D\n2jnGhi24QoUkZTKw8edKi1fZjqsfyCRDs3bi2jVkLjM96wz07ZJN1tM6VBzw7scR\nvxRpvlbRmq6PG7ArnBpahUme\n-----END PRIVATE KEY-----\n",
+    
+    "client_email": "hawkhacksimagesimages@hawk-hacks.iam.gserviceaccount.com",
+    
+    "client_id": "110466908235549238427",
+    
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    
+    "token_uri": "https://oauth2.googleapis.com/token",
+    
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hawkhacksimagesimages%40hawk-hacks.iam.gserviceaccount.com",
+    
+    "universe_domain": "googleapis.com"
+    
+    }

@@ -1,11 +1,15 @@
+"use client";;
+
 import * as React from 'react';
 import { BentoGrid, BentoGridItem } from "./BentoGrid";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import Image from "next/image";
 import { ChangeEvent, useState } from "react";
+import { getAllProjects } from "@/utils/lib/projects";
+import Image from 'next/image';
+import { withAuthInfo, WithAuthInfoProps } from "@propelauth/react";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -18,7 +22,9 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-export function BentoGridDemo() {
+
+
+export const BentoGridDemo = withAuthInfo((props: WithAuthInfoProps) => {
   const [gemError, setGemError] = React.useState("");
   const [item, setItem] = React.useState<{
     title: string;
@@ -26,17 +32,44 @@ export function BentoGridDemo() {
     header: React.ReactNode;
     icon: React.ReactNode;
   }>({title: "", description: "", header: "", icon: ""});
+
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = (item:any) => {
     setItem(item);
     setOpen(true);
   }
   const handleClose = () => setOpen(false);
 
+  // Set state to store the projects
+  const [projects, setProjects] = React.useState<any[]>([]);
+  
+
+  // Get the user email from the props
+  const email = props.user?.email;
+
+  // Get all the projects for everyone except the user
+  React.useEffect(() => {
+    async function fetchData() {
+      const response = await getAllProjects(email);
+      console.log("ARYANANNNANANANA:", response.data);
+
+      if (!response.success) {
+        console.error("Error fetching data");
+      } else {
+        // Set the projects in the state
+        setProjects(response.data);
+      }
+    }
+
+    fetchData();
+  }, [])
+
   const [imageUrl, setImageUrl] = useState(null as string | null);
 
-    const onImageFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
-        const fileInput = e.target;
+    const onSubmit = async () => {
+
+        const fileInput = document.getElementById("upload-image") as HTMLInputElement;
 
         if (!fileInput.files) {
             console.warn("no file was chosen");
@@ -72,29 +105,24 @@ export function BentoGridDemo() {
         } catch (error) {
             console.error("something went wrong, check your console.");
         }
-
-        /** Reset file input */
-        e.target.type = "text";
-        e.target.type = "file";
     };
 
   return (
     <>
     <BentoGrid className="max-w-4xl mx-auto mt-24">
-      {items.map((item, i) => (
+      {projects.map((project, i) => (
         <BentoGridItem
-          onClick={() => handleOpen(item)}
+          onClick={() => handleOpen(project)}
           key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          icon={item.icon}
+          title={project.title}
+          description={project.description}
+          header={<Skeleton img_link={project.sampleImages[0]}/>}
+          icon={<span>{project.pointsPerImage} P$</span>}
           className={i === 3 || i === 6 ? "md:col-span-2" : ""}
         />
       ))}
     </BentoGrid>
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -106,73 +134,86 @@ export function BentoGridDemo() {
             {item.title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {item.description}
+            Created By: {item.createdBy}
           </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Points: {item.pointsPerImage}
+          </Typography>
+          {
+            item.sampleImages?.map((img, i) => (
+              <a href={img} target="_blank" key={i}>Image {i+1}, </a>
+            ))
+          }
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Upload your Image here:
           </Typography>
           <input
+            id="upload-image"
             type="file"
-            onChange={onImageFileChange}
           />
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {gemError}
           </Typography>
+          <Button onClick={handleClose}>Close</Button>
+          <Button onClick={onSubmit}>Upload</Button>
         </Box>
       </Modal>
     </div>
 
     </>
   );
-}
-const Skeleton = () => (
+});
+
+const Skeleton = ({img_link}) => (
   <img
-    src="demo1.png"
+    src={img_link}
     className="object-cover flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"
   ></img>
 );
+
 const items = [
   {
     title: "The Dawn of Innovation",
     description: "Explore the birth of groundbreaking ideas and inventions.",
-    header: <Skeleton />,
+    header: <Skeleton img_link="demo1.png"/>,
     icon: <span>100 P$</span>,
   },
   {
     title: "The Digital Revolution",
     description: "Dive into the transformative power of technology.",
-    header: <Skeleton />,
+    header: <Skeleton img_link="demo1.png"/>,
     icon: <span>100 P$</span>,
   },
   {
     title: "The Art of Design",
     description: "Discover the beauty of thoughtful and functional design.",
-    header: <Skeleton />,
+    header: <Skeleton img_link="demo1.png"/>,
     icon: <span>100 P$</span>,
   },
   {
     title: "The Power of Communication",
     description:
       "Understand the impact of effective communication in our lives.",
-    header: <Skeleton />,
+    header: <Skeleton img_link="demo1.png"/>,
     icon: <span>100 P$</span>,
   },
   {
     title: "The Pursuit of Knowledge",
     description: "Join the quest for understanding and enlightenment.",
-    header: <Skeleton />,
+    header: <Skeleton img_link="demo1.png"/>,
     icon: <span>100 P$</span>,
   },
   {
     title: "The Joy of Creation",
     description: "Experience the thrill of bringing ideas to life.",
-    header: <Skeleton />,
+    header: <Skeleton img_link="demo1.png"/>,
     icon: <span>100 P$</span>,
   },
   {
     title: "The Spirit of Adventure",
     description: "Embark on exciting journeys and thrilling discoveries.",
-    header: <Skeleton />,
+    header: <Skeleton img_link="demo1.png"/>,
     icon: <span>100 P$</span>,
   },
 ];
+

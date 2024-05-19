@@ -1,8 +1,6 @@
-// Functions to handle user auth and database storage
-
-// Define the response type
-const userAuth = async (username, email, profilePicture) => {
-  // Create the filter parameter
+// Function to authenticate the user and store in the database
+const storeUserDetailsAfterAuthentication = async (email: string) => {
+    // Create the filter parameter
   const filter = JSON.stringify({
     email: {
       equals: email,
@@ -40,9 +38,8 @@ const userAuth = async (username, email, profilePicture) => {
           "X-API-KEY": process.env.NEXT_PUBLIC_NEURELO_API_KEY,
         },
         body: JSON.stringify({
-          username: username,
           email: email,
-          profilePicture: profilePicture,
+          points: "0"
         }),
       },
     );
@@ -61,4 +58,4 @@ const userAuth = async (username, email, profilePicture) => {
   return { success: true, data: result.data[0] };
 };
 
-export { userAuth };
+export { storeUserDetailsAfterAuthentication };
