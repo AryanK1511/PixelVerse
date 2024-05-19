@@ -17,7 +17,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
     await page.click("#button-1010001");
 
     await page.waitForNavigation();
-
+  
     await page.goto(
       "https://dashboard.neurelo.com/projects/prj_4e9f411a-8547-4851-bf34-945a6f18de3c/environments/env_04e32abb-d981-4bf4-afa4-3eb9439e6e26?tab=api-observability&defaultTimeRange=%22last_24_hours%22&operationName=findManyDatasets&operationType=openapi&filters=%7B%22timeRange%22%3A%22last_24_hours%22%7D"
     );
