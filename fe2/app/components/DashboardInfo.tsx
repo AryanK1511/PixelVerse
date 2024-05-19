@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { withAuthInfo, WithAuthInfoProps } from "@propelauth/react";
 import React from 'react';
 
