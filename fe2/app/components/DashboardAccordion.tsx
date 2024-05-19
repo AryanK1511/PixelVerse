@@ -63,7 +63,7 @@ const DashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
                         uploadedImages: project.uploadedImages.concat(data.url),
                     }
 
-                const resp = await updateProject(project.id, projectt);
+                const resp = await updateProject(project.id, projectt, props.user?.email!);
 
                 console.log(resp);  
                 if (!resp.success) {

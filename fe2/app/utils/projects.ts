@@ -99,7 +99,7 @@ const addProject = async (project) => {
 
 };
 
-const updateProject = async (projectId, project) => {
+const updateProject = async (projectId, project, email) => {
   console.log("The project UPDATE:", project);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_NEURELO_API_URL}/rest/Datasets/${projectId}`,
@@ -132,7 +132,28 @@ const updateProject = async (projectId, project) => {
 
   console.log(result.data);
 
-  return { success: true, data: result.data };
+  // Update the points in the users class
+  const result2 = await fetch(
+    `${process.env.NEXT_PUBLIC_NEURELO_API_URL}/rest/Users?filter=${encodeURIComponent(JSON.stringify({ email: email }))}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": process.env.NEXT_PUBLIC_NEURELO_API_KEY,
+      },
+      body: JSON.stringify({
+        points: {increment: project.pointsPerImage.toString()},
+      }),
+    }
+  );
+
+  if (!result2.ok) {
+    return { success: false, message: "Error updating points" };
+  }
+
+  const data = await result2.json();
+
+  return { success: true, data: data };
 };
 
 
