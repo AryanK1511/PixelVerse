@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {Accordion, AccordionItem, Avatar, Button, Link} from "@nextui-org/react";
 import { getUserProjects } from "../../utils/lib/projects";
 import { WithAuthInfoProps, withAuthInfo } from '@propelauth/react';
+import AddProject from './AddProject';
 
 const UserDashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
     const [projects, setProjects] = React.useState<any[]>([]);
@@ -19,6 +20,7 @@ const UserDashboardAccordion = withAuthInfo((props: WithAuthInfoProps) => {
       }, [props.user?.email])
     return (
     <>
+        <AddProject />
       <Accordion selectionMode="multiple">
         {
             projects.map((project, i) => {
