@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   if (!file) {
     return NextResponse.json(
       { error: "File blob is required." },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
@@ -28,11 +28,11 @@ export async function POST(request: NextRequest) {
     } else {
       console.error(
         "Error while trying to create directory when uploading a file\n",
-        e,
+        e
       );
       return NextResponse.json(
         { error: "Something went wrong. Directory Error" },
-        { status: 500 },
+        { status: 500 }
       );
     }
   }
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     if (!file) {
       return NextResponse.json(
         { error: "File blob is required." },
-        { status: 400 },
+        { status: 400 }
       );
     }
     const filename = `${uniqueSuffix}.${mime.getExtension(file.type)}`;
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
         console.error("Error while trying to upload a file\n", e);
         return NextResponse.json(
           { error: "Error with google" },
-          { status: 400 },
+          { status: 400 }
         );
       });
 
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     console.error("Error while trying to upload a file\n", e);
     return NextResponse.json(
       { error: "Something went wrong. Unown Error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
