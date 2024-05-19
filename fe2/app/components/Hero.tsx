@@ -9,6 +9,7 @@ const Hero = () => {
 
     React.useEffect(() => {
       if(localStorage.getItem("numUsers") && localStorage.getItem("numProjects")) {
+        console.log("Values already set in local storage");
         setNumUsers(parseInt(localStorage.getItem("numUsers")!));
         setNumProjects(parseInt(localStorage.getItem("numProjects")!));
       }
@@ -16,14 +17,24 @@ const Hero = () => {
         if(res.ok) {
           setNumUsers(res.calls);
           localStorage.setItem("numUsers", (res.calls).toString());
+          console.log("Num Users: ", res.calls);
         }
-      });
-      fetch("/api/createProjects").then((res) => res.json()).then((res) =>{
+        else if (res.calls) {
+            setNumUsers(res.calls);
+            localStorage.setItem("numUsers", (res.calls).toString());
+        }
+      }).catch((err) => console.log(err));
+      fetch("/api/createProject").then((res) => res.json()).then((res) =>{
         if(res.ok) {
           setNumProjects(res.calls);
           localStorage.setItem("numProjects", (res.calls).toString());
+          console.log("Num Projects: ", res.calls);
         }
-      });
+        else if(res.calls) {
+            setNumProjects(res.calls);
+            localStorage.setItem("numProjects", (res.calls).toString());
+        }
+      }).catch((err) => console.log(err));
     }, []);
 
     const router = useRouter();

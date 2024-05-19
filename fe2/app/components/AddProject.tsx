@@ -40,10 +40,6 @@ const AddProject = withAuthInfo((props: WithAuthInfoProps) => {
         const file = fileInput.files[0];
         const formData = new FormData();
         
-        //formData.append("name", name);
-        //formData.append("description", description);
-        //formData.append("numberOfImages", numberOfImages);
-        //formData.append("tokensAwarded", tokensAwarded);
         formData.append("file", file);
         
         try {

@@ -47,7 +47,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
         calls: matches
           .map((match) => Number(match[match.length - 1]))
           .reduce((partialSum, a) => partialSum + a, 0),
-      });
+        }, { status: 200 });
     } else {
       return Response.json({ message: "No matches found." });
     }
