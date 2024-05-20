@@ -1,1 +1,1 @@
-export { userAuth } from "./userAuth";
+export { getAllProjects, getUserProjects } from "./projects";
